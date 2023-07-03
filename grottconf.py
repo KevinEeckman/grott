@@ -10,7 +10,7 @@ from grottdata import format_multi_line, str2bool
 
 class Conf : 
 
-    def __init__(self, vrm): 
+    def __init__(self, vrm, cmdargs=None): 
         self.verrel = vrm
 
         #Set default variables 
@@ -52,6 +52,7 @@ class Conf :
         self.mqttuser = "grott"
         self.mqttpsw = "growatt2020"
         self.mqttretain = False
+        self.mqttpostprocess = False                                                                 #Post process mqtt message (applying dividers etc.)    
 
         #pvoutput default 
         self.pvoutput = False
@@ -77,6 +78,7 @@ class Conf :
         self.iftoken  = "influx_token"
         self.iforg  = "grottorg"
         self.ifbucket = "grottdb" 
+        self.ifpostprocess = False                                                                  #Post process influxdb message (applying dividers etc.)
 
         #extension 
         self.extension = False
@@ -89,7 +91,7 @@ class Conf :
         #Set parm's 
         #prio: 1.Command line parms, 2.env. variables, 3.config file 4.program default
         #process command settings that set processing values (verbose, trace, output, config, nomqtt)
-        self.parserinit() 
+        self.parserinit(cmdargs) 
         
         #Process config file
         self.procconf()
@@ -217,6 +219,7 @@ class Conf :
         print("\tgrottip              \t",self.grottip)
         print("\tgrottport            \t",self.grottport)
         #print("\tSN           \t",self.SN)
+
         print("_MQTT:")
         print("\tnomqtt               \t",self.nomqtt)
         print("\tmqttip:              \t",self.mqttip)
@@ -229,6 +232,8 @@ class Conf :
         print("\tmqtttauth:           \t",self.mqttauth)
         print("\tmqttuser:            \t",self.mqttuser)
         print("\tmqttpsw:             \t","**secret**")                       #scramble output if tested!
+        print("\tmqttpostprocess:     \t",self.mqttpostprocess)
+
         #print("\tmqttpsw:     \t",self.mqttpsw)                       #scramble output if tested!
         print("_Growatt server:")
         print("\tgrowattip:           \t",self.growattip)
@@ -245,6 +250,7 @@ class Conf :
         else: 
             print("\tpvsystemid:          \t",self.pvsystemid)
             print("\tpvinvertid:          \t",self.pvinverterid)
+        
         print("_Influxdb:")
         print("\tinflux:             \t",self.influx)
         print("\tinflux2:            \t",self.influx2)
@@ -257,7 +263,8 @@ class Conf :
         print("\torganization:       \t",self.iforg ) 
         print("\tbucket:             \t",self.ifbucket) 
         print("\ttoken:              \t","**secret**")
-        #print("\ttoken:       \t",self.iftoken)  
+        #print("\ttoken:       \t",self.iftoken)
+        print("\tifpostprocess:      \t",self.ifpostprocess)
         
         print("_Extension:")
         print("\textension:          \t",self.extension) 
@@ -267,7 +274,7 @@ class Conf :
         print()
 
 
-    def parserinit(self): 
+    def parserinit(self, cmdargs): 
         #Process commandline parameters init (read args, process c,v,o settings)
         parser = argparse.ArgumentParser(prog='grott')
         parser.add_argument('-v','--verbose',help="set verbose",action='store_true')
@@ -283,7 +290,7 @@ class Conf :
         parser.add_argument('-n','--noipf',help="Allow IP change from growatt website",action='store_true')
         
       
-        args, unknown = parser.parse_known_args()
+        args, unknown = parser.parse_known_args(args=cmdargs)
 
         if (args.c != None) : self.cfgfile=args.c
         #if (args.o != None) : sys.stdout = open(args.o, 'wb',0) changed to support unbuffered output in windows !!!
@@ -388,6 +395,7 @@ class Conf :
         if config.has_option("MQTT","auth"): self.mqttauth = config.getboolean("MQTT","auth")
         if config.has_option("MQTT","user"): self.mqttuser = config.get("MQTT","user")
         if config.has_option("MQTT","password"): self.mqttpsw = config.get("MQTT","password")
+        if config.has_option("MQTT","postprocessdata"): self.mqttpostprocess = config.getboolean("MQTT","postprocessdata")
         if config.has_option("PVOutput","pvoutput"): self.pvoutput = config.get("PVOutput","pvoutput")
         if config.has_option("PVOutput","pvtemp"): self.pvtemp = config.get("PVOutput","pvtemp")
         if config.has_option("PVOutput","pvdisv1"): self.pvdisv1 = config.get("PVOutput","pvdisv1")
@@ -412,6 +420,7 @@ class Conf :
         if config.has_option("influx","org"): self.iforg = config.get("influx","org")
         if config.has_option("influx","bucket"): self.ifbucket = config.get("influx","bucket")
         if config.has_option("influx","token"): self.iftoken = config.get("influx","token")
+        if config.has_option("influx","postprocessdata"): self.ifpostprocess = config.getboolean("influx","postprocessdata")
         #extensionINFLUX
         if config.has_option("extension","extension"): self.extension = config.get("extension","extension") 
         if config.has_option("extension","extname"): self.extname = config.get("extension","extname") 
