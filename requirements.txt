@@ -3,3 +3,4 @@ paho-mqtt
 libscrc
 influxdb-client
 pytz
+requests
