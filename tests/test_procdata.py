@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch, Mock
 import json
+import importlib
 
 from grottconf import Conf
 import grottdata
@@ -116,11 +117,11 @@ class TestProcData:
     b'\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x4b\x2f'
 
     @pytest.mark.parametrize('cfg_file, expected', [
-    ('tests/testdata/grott_applydividers_test_mqtt_true.ini', 59), 
-    ('tests/testdata/grott_applydividers_test_mqtt_false.ini', 590)])
+    ('testdata/grott_applydividers_test_mqtt_true.ini', 59),
+    ('testdata/grott_applydividers_test_mqtt_false.ini', 590)])
     @patch('grottdata.publish.single')
     def test_mqtt_applydividers(self, mock_publish_single, cfg_file, expected):
-        conf = Conf("2.7.8", cmdargs=['-c', cfg_file])
+        conf = Conf("2.8.3", cmdargs=['-c', cfg_file])
         grottdata.procdata(conf,self.valid_data)
         assert mock_publish_single.called == True
         json_payload = json.loads(mock_publish_single.call_args.kwargs['payload'])
@@ -130,15 +131,23 @@ class TestProcData:
 
 
     @pytest.mark.parametrize('cfg_file, expected', [
-    ('tests/testdata/grott_applydividers_test_influxdb_false.ini', 590), 
-    ('tests/testdata/grott_applydividers_test_influxdb_true.ini', 59)])
+    ('testdata/grott_applydividers_test_influxdb_false.ini', 590),
+    ('testdata/grott_applydividers_test_influxdb_true.ini', 59)])
     def test_influxdb_applydividers(self, cfg_file, expected):
-        conf = Conf("2.7.8", cmdargs=['-c', cfg_file])
+        conf = Conf("2.8.3", cmdargs=['-c', cfg_file])
         
         # we need to set influx and influx2 to True, otherwise the ifwrite_api.write() call will not be made
         # but we have to set it after conf is initialized, to skip the actual influxdb connection opening
         conf.influx = True
         conf.influx2 = True
+
+        # we need the influxdb-client and pytz modules for this test
+
+        for module_name in ('pytz', 'influxdb_client'):
+            try:
+                importlib.import_module(module_name)
+            except ImportError:
+                pytest.fail(f"Module '{module_name}' cannot be imported.")
 
         ifwrite_mock = Mock()
         conf.ifwrite_api = ifwrite_mock

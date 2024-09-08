@@ -1,0 +1,5 @@
+pytest
+paho-mqtt
+libscrc
+influxdb-client
+pytz
