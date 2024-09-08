@@ -355,12 +355,12 @@ class TestProcData:
 
     @patch('grottdata.publish.single')
     def test_discard_invalid_data_1(self, mock_publish_single):
-        conf = Conf("2.7.8", cmdargs=['-c', 'tests/testdata/grott_applydividers_test_mqtt_true.ini'])
+        conf = Conf("2.7.8", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
         grottdata.procdata(conf,self.invalid_data_1)
         assert mock_publish_single.called == False
 
     @patch('grottdata.publish.single')
     def test_discard_invalid_data_2(self, mock_publish_single):
-        conf = Conf("2.7.8", cmdargs=['-c', 'tests/testdata/grott_applydividers_test_mqtt_true.ini'])
+        conf = Conf("2.7.8", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
         grottdata.procdata(conf,self.invalid_data_2)
         assert mock_publish_single.called == False
