@@ -309,6 +309,109 @@ class TestProcData:
     b'\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61'\
     b'\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x35\xd3'
 
+    # This data seems to trigger an error message (see last line of this comment)
+    #
+    # Sep 09 01:15:04 europa grott[239873]:          - Grott automatic protocol detection
+    # Sep 09 01:15:04 europa grott[239873]:          - Grott data record length 359
+    # Sep 09 01:15:04 europa grott[239873]:          - layout   :  T060104SPF
+    # Sep 09 01:15:04 europa grott[239873]:          - no matching record layout found, try generic
+    # Sep 09 01:15:04 europa grott[239873]:          - Record layout used :  T06NNNNSPF
+    # Sep 09 01:15:04 europa grott[239873]:          - Growatt data decrypted V2
+    # Sep 09 01:15:04 europa grott[239873]:          - Grott Growatt data decrypted
+    # Sep 09 01:15:04 europa grott[239873]:          - Growatt plain data:
+    # Sep 09 01:15:04 europa grott[239873]:                  039e0006015f01044444443043414231393100000000000000000000000000000000000000004
+    # Sep 09 01:15:04 europa grott[239873]:                  7594832424c4c3038300000000000000000000000000000000000000000180908122d07030000
+    # Sep 09 01:15:04 europa grott[239873]:                  002c000c06b206b20000335e0000335e01ea00000000208a00002404000000000000000015040
+    # Sep 09 01:15:04 europa grott[239873]:                  064000000000000081f1388000001510213011f14e60000000000000000000000510051000000
+    # Sep 09 01:15:04 europa grott[239873]:                  000000000000000000000000004e25002d00590000000000000000002dffffccff00000000000
+    # Sep 09 01:15:04 europa grott[239873]:                  0000000000000000003800000002000009a230000000000000000000000000000000000000000
+    # Sep 09 01:15:04 europa grott[239873]:                  206200002062ffffba0a0000000000000000014c00000000002000009a230000005a008601ea0
+    # Sep 09 01:15:04 europa grott[239873]:                  001071a000000030000000000000a44ffffccff002df7dbf7dbf7dbf7dbf7db00000000000000
+    # Sep 09 01:15:04 europa grott[239873]:                  00000000000000000000000000000000000000000000000000000000000000000000000000000
+    # Sep 09 01:15:04 europa grott[239873]:                  000000000000000000000b6d9
+    # Sep 09 01:15:04 europa grott[239873]:          - Growatt new layout processing
+    # Sep 09 01:15:04 europa grott[239873]:                  - decrypt       :  True
+    # Sep 09 01:15:04 europa grott[239873]:                  - offset        :  6
+    # Sep 09 01:15:04 europa grott[239873]:                  - record layout :  T06NNNNSPF
+    # Sep 09 01:15:04 europa grott[239873]:          - Grott server date/time used
+    # Sep 09 01:15:04 europa grott[239873]:          - Grott values retrieved:
+    # Sep 09 01:15:04 europa grott[239873]:                  -  datalogserial        :  DDD0CAB191
+    # Sep 09 01:15:04 europa grott[239873]:                  -  pvserial             :  GYH2BLL080
+    # Sep 09 01:15:04 europa grott[239873]:                  -  pvstatus             :  12
+    # Sep 09 01:15:04 europa grott[239873]:                  -  vpv1                 :  171.4
+    # Sep 09 01:15:04 europa grott[239873]:                  -  vpv2                 :  171.4
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ppv1                 :  1315.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ppv2                 :  1315.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  buck1curr            :  49.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  buck2curr            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  op_watt              :  833.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  pvpowerout           :  833.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  op_va                :  236032.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  acchr_watt           :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  acchr_VA             :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  bat_Volt             :  53.8
+    # Sep 09 01:15:04 europa grott[239873]:                  -  batterySoc           :  100
+    # Sep 09 01:15:04 europa grott[239873]:                  -  bus_volt             :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  grid_volt            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  line_freq            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  outputvolt           :  207.9
+    # Sep 09 01:15:04 europa grott[239873]:                  -  pvgridvoltage        :  207.9
+    # Sep 09 01:15:04 europa grott[239873]:                  -  outputfreq           :  50.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  invtemp              :  33.7
+    # Sep 09 01:15:04 europa grott[239873]:                  -  dcdctemp             :  53.1
+    # Sep 09 01:15:04 europa grott[239873]:                  -  loadpercent          :  28.7
+    # Sep 09 01:15:04 europa grott[239873]:                  -  buck1_ntc            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  buck2_ntc            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  OP_Curr              :  8.1
+    # Sep 09 01:15:04 europa grott[239873]:                  -  Inv_Curr             :  8.1
+    # Sep 09 01:15:04 europa grott[239873]:                  -  AC_InWatt            :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  AC_InVA              :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  faultBit             :  0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  warningBit           :  0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  faultValue           :  0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  warningValue         :  0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  constantPowerOK      :  0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  epvtoday             :  4.5
+    # Sep 09 01:15:04 europa grott[239873]:                  -  pvenergytoday        :  4.5
+    # Sep 09 01:15:04 europa grott[239873]:                  -  epvtotal             :  429495423.9
+    # Sep 09 01:15:04 europa grott[239873]:                  -  eacCharToday         :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  eacCharTotal         :  89.6
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ebatDischarToday     :  3.2
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ebatDischarTotal     :  3945.9
+    # Sep 09 01:15:04 europa grott[239873]:                  -  eacDischarToday      :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  eacDischarTotal      :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ACCharCurr           :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ACDischarWatt        :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  ACDischarVA          :  0.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  BatDischarWatt       :  829.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  BatDischarVA         :  829.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  BatWatt              :  -1791.0
+    # Sep 09 01:15:04 europa grott[239873]:                  -  invfanspeed          :  0
+    # Sep 09 01:15:04 europa grott[239873]:          - Growatt data not consistent ({invalid_key}), processing stopped
+    invalid_key = b'\x03\x9e\x00\x06\x01\x5f\x01\x04\x03\x36\x2b\x47\x22\x35\x36\x76\x4b\x5e\x77'\
+    b'\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72'\
+    b'\x28\x2e\x29\x46\x36\x0b\x3e\x5f\x4f\x51\x74\x74\x47\x72\x6f\x77\x61\x74\x74'\
+    b'\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x79\x7d\x7c\x55\x5f\x68\x74\x61'\
+    b'\x74\x74\x6b\x72\x63\x71\xd3\x72\xc6\x47\x72\x5c\x29\x61\x74\x47\x19\x73\x85'\
+    b'\x77\x61\x74\x74\x67\xf8\x6f\x77\x45\x70\x74\x47\x72\x6f\x77\x61\x74\x74\x52'\
+    b'\x76\x6f\x13\x61\x74\x74\x47\x72\x6f\x7f\x7e\x67\xfc\x47\x72\x6e\x26\x63\x67'\
+    b'\x75\x58\x66\x89\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x16\x72\x3e\x77'\
+    b'\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x3a\x51\x47\x5f'\
+    b'\x6f\x2e\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x59\xb8\x8d\xa3\x88\x61\x74\x74'\
+    b'\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x62\xf4\x74\x47\x72\x4f\x77\x61'\
+    b'\xee\x57\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f'\
+    b'\x77\x61\x74\x54\x25\x72\x6f\x57\x03\x8b\x8b\xfd\x78\x6f\x77\x61\x74\x74\x47'\
+    b'\x72\x6f\x76\x2d\x74\x74\x47\x72\x6f\x57\x61\x74\xee\x64\x72\x6f\x77\x3b\x74'\
+    b'\xf2\x46\x98\x6f\x76\x66\x6e\x74\x47\x72\x6c\x77\x61\x74\x74\x47\x72\x65\x33'\
+    b'\x9e\x8b\xb8\xb8\x72\x42\x80\xba\x83\xaf\xb0\xa9\x98\xac\x96\xaf\x74\x47\x72'\
+    b'\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74'\
+    b'\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61'\
+    b'\x74\x74\x47\x72\x6f\x77\x61\x74\x74\x47\x72\x6f\x77\x61\x74\xc2\x9e'
+
+
+
+
+
     @pytest.mark.parametrize('cfg_file, expected', [
     ('testdata/grott_applydividers_test_mqtt_true.ini', 59),
     ('testdata/grott_applydividers_test_mqtt_false.ini', 590)])
@@ -355,12 +458,18 @@ class TestProcData:
 
     @patch('grottdata.publish.single')
     def test_discard_invalid_data_1(self, mock_publish_single):
-        conf = Conf("2.7.8", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
+        conf = Conf("2.8.3", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
         grottdata.procdata(conf,self.invalid_data_1)
         assert mock_publish_single.called == False
 
     @patch('grottdata.publish.single')
     def test_discard_invalid_data_2(self, mock_publish_single):
-        conf = Conf("2.7.8", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
+        conf = Conf("2.8.3", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
         grottdata.procdata(conf,self.invalid_data_2)
         assert mock_publish_single.called == False
+
+    @patch('grottdata.publish.single')
+    def test_analyse_invalid_key(self, mock_publish_single):
+        conf = Conf("2.8.3", cmdargs=['-c', 'testdata/grott_applydividers_test_mqtt_true.ini'])
+        grottdata.procdata(conf,self.invalid_key)
+        assert mock_publish_single.called == True

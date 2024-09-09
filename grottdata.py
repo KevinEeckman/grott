@@ -82,16 +82,16 @@ def str2bool(defstr):
 def is_message_valid(definedkey:dict) -> Optional[str]:
     # TODO : this test is a too arbitrary. We just assume that no Growatt inverter can handle more than 12000W of input solar power.
     if 'ppv1' in definedkey:
-        if definedkey['ppv1'] > 12000:
+        if definedkey['ppv1'] > 120000:
             return 'ppv1'
     
     if 'ppv2' in definedkey:
-        if definedkey['ppv2'] > 12000:
+        if definedkey['ppv2'] > 120000:
             return 'ppv2'
 
     # TODO : this test is a too arbitrary. We just assume that no Growatt inverter can produce more than 200kWh of energy in a single day.
     if 'epvtoday' in definedkey:
-        if definedkey['epvtoday'] > 200:
+        if definedkey['epvtoday'] > 2000:
             return 'epvtoday'
     
     return None
@@ -440,7 +440,7 @@ def procdata(conf,data):
     # @KevinEeckman : sometime my SPF6000T DVM MPV sends inconsistent data, which must be discared (see unit tests for examples of corrupted data)
     invalid_key = is_message_valid(definedkey)
     if  invalid_key is not None:
-        if conf.verbose: print(f"\t - " + 'Growatt data not consistent ({invalid_key}), processing stopped')
+        if conf.verbose: print("\t - " + f'Growatt data not consistent ({invalid_key}), processing stopped')
         return
 
     if dataprocessed: 
